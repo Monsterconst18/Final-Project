@@ -21,19 +21,24 @@ public class Address {
      * @return the postal code at a specific length
      */
     public static boolean isPostalCodeValid(String postalCode) {
-        //TODO: to be implemented
-        return false;
+        if ((postalCode.length() != 6) && (postalCode.length() != 7))
+            return false;
+        if (postalCode.length() == 6) {
+            return Character.isLetter(postalCode.charAt(0)) && Character.isDigit(postalCode.charAt(1))
+                    && Character.isLetter(postalCode.charAt(2)) && Character.isDigit(postalCode.charAt(3))
+                    && Character.isLetter(postalCode.charAt(4)) && Character.isDigit(postalCode.charAt(5));
+        } else {
+            return Character.isLetter(postalCode.charAt(0)) && Character.isDigit(postalCode.charAt(1))
+                    && Character.isLetter(postalCode.charAt(2)) && Character.isDigit(postalCode.charAt(4))
+                    && Character.isLetter(postalCode.charAt(5)) && Character.isDigit(postalCode.charAt(6))
+                    && Character.isSpaceChar(postalCode.charAt(3));
+        }
     }
-//        char character = 'C';
-//        char digit = 'D';
-//        int length;
-//        if (length == 6) {
-//            postalCode = "CDCDCD";
-//        if (length == 7) {
-//            postalCode = "CDC DCD";
-//        }
-//        return postalCode;
-//        }
-    }
+}
+
+
+
+
+
 
 

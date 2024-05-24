@@ -14,6 +14,7 @@ public class Course {
     private String courseName;
     private double credits;
     private Department department;
+    private ArrayList<Assignment> assignments;
     private ArrayList<Student> registeredStudents;
     private ArrayList<Double> finalScores;
     private static int nextId;
@@ -23,9 +24,9 @@ public class Course {
      * @return true or false to determine if assignment weight is valid
      */
     public boolean isAssignmentWeightValid() {
-        //TODO: To be implemented
-        return false;
-    }
+       //TODO: TO be implemented
+            return false;
+        }
 
     /**
      * Checks if a student is registered to a specific course
@@ -72,6 +73,26 @@ public class Course {
      */
     public void displayScores() {
         //TODO: To be implemented
+    }
 
+    /**
+     * Converts a course to a simple string
+     * @return the simplified string
+     */
+    public String toSimplifiedString() {
+        //TODO: To be implemented
+        return "";
+    }
+
+    @Override
+    public String toString() {
+        return "Course{" +
+                "courseId='" + courseId + '\'' +
+                ", courseName='" + courseName + '\'' +
+                ", credits=" + credits +
+                ", department=" + department +
+                ", assignments=" + assignments +
+                ", registeredStudents=" + registeredStudents +
+                '}';
     }
 }

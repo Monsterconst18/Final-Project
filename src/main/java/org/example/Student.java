@@ -4,6 +4,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 @EqualsAndHashCode
@@ -15,58 +16,63 @@ public class Student {
     private Gender gender;
     private Address address;
     private Department department;
-    private Course[] registeredCourse;
+    private ArrayList<Course> registeredCourses;
     private static int nextId;
 
     /**
-     * registers a course, add the course to the student's registeredCourses list, and add the student to the course's
-     * registeredStudents list. If the course is already registered, directly returns `false`
+     * Checks if a student is registered for a specific course
      * @param course the registered course
-     * @return the course that you register for
+     * @return the course that the student registered for
      */
     public boolean registerCourse(Course course) {
-        //TODO: To be implemented
-        return false;
+        if (registeredCourses.contains(course)) {
+            return false;
+        } else {
+            registeredCourses.add(course);
+            return true;
+        }
+
     }
 
     /**
-     * drops a course, remove the course from the student's registeredCourses list, and remove the student from the course's registeredStudents list.
-     * If the course is not registered yet, directly returns `false`
-     * @param courseId the Id of the course you drop
-     * @return the course that you drop
+     * Checks if a student dropped a specific course
+     * @param course the dropped course
+     * @return the course that the student dropped
      */
-    public boolean dropCourse(String courseId) {
-        //TODO: To be implemented
-        return true;
+    public boolean dropCourse(Course course) {
+      if (registeredCourses.contains(course)) {
+          registeredCourses.remove(course);
+          return true;
+        } else {
+            return false;
+        }
     }
-
     /**
-     * Creates a student with `studentId` automatically generated
-     * based on the `nextId`, and `registeredCourses` as empty object
-     * @param studentName the name of student
+     * Creates a student
+     * @param studentName the name of the student
      * @param gender the student's gender
-     * @param department the department of a student
-     * @return the details of the student
+     * @param department the student's department
      */
-    public Student(String studentName, String gender, Department department) {
-        //TODO: To be implemented
+    public Student(String studentName, Gender gender, Department department) {
+        this.studentName = studentName;
+        this.gender = gender;
+        this.department = department;
     }
 
     /**
      * Converts a student to a simple string
-     * with only the `studentId`, the `studentName`, and `departmentName`
      * @return the simplified string
      */
     public String toSimplifiedString() {
-        //TODO: To be implemented
-        return "str";
-    }
 
-    /**
-     * Converts a student to a string that contains
-     * the `studentId`, the `studentName`, the `gender`, the `address` and the `department`, and the `registeredCourses`
-     * @return the full details of the student
-     */
+
+
+        return "Student{" +
+                "studentId='" + studentId + '\'' +
+                ", studentName='" + studentName + '\'' +
+                ", department=" + department +
+                '}';
+    }
 
     @Override
     public String toString() {
@@ -76,8 +82,9 @@ public class Student {
                 ", gender=" + gender +
                 ", address=" + address +
                 ", department=" + department +
-                ", registeredCourse=" + Arrays.toString(registeredCourse) +
+                ", registeredCourses=" + registeredCourses +
                 '}';
     }
 }
+
 
