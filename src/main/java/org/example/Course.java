@@ -17,7 +17,12 @@ public class Course {
     private ArrayList<Assignment> assignments;
     private ArrayList<Student> registeredStudents;
     private ArrayList<Double> finalScores;
-    private static int nextId;
+    private static int nextId = 1;
+
+
+    public Course(String courseName, double credits, Department department){
+        this.courseId = "C-" + department.getDepartmentId() + "-" + String.format("%02d" , Course.nextId++);
+    }
 
     /**
      * Checks if assignment weight is valid

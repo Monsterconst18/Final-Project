@@ -2,7 +2,7 @@ package org.example;
 
 import lombok.*;
 
-@AllArgsConstructor
+
 @ToString
 @EqualsAndHashCode
 @Getter
@@ -32,6 +32,19 @@ public class Address {
                     && Character.isLetter(postalCode.charAt(2)) && Character.isDigit(postalCode.charAt(4))
                     && Character.isLetter(postalCode.charAt(5)) && Character.isDigit(postalCode.charAt(6))
                     && Character.isSpaceChar(postalCode.charAt(3));
+        }
+    }
+    public Address(int streetNo, String street, String city, String province, String postalCode, String country){
+        this.street = street;
+        this.streetNo = streetNo;
+        this.city = city;
+        this.province = province;
+        this.country = country;
+        if (isPostalCodeValid(postalCode)){
+            this.postalCode = postalCode.toUpperCase();
+        }
+        else{
+            this.postalCode = null;
         }
     }
 }

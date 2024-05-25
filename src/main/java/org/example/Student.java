@@ -17,7 +17,7 @@ public class Student {
     private Address address;
     private Department department;
     private ArrayList<Course> registeredCourses;
-    private static int nextId;
+    private static int nextId = 1;
 
     /**
      * Checks if a student is registered for a specific course
@@ -56,9 +56,11 @@ public class Student {
      * @param department the student's department
      */
     public Student(String studentName, Gender gender, Department department) {
+        this.studentId = this.studentId = "S" + String.format("%06d" , Student.nextId++);
         this.studentName = studentName;
         this.gender = gender;
         this.department = department;
+
     }
 
     /**

@@ -15,7 +15,7 @@ public class Assignment {
     private int maxScore;
     private double assignmentAverage;
     private ArrayList<Integer> scores;
-    private static int nextId;
+    private static int nextId = 1;
 
     /**
      * Calculates the overall average of all assignments
@@ -44,6 +44,11 @@ public class Assignment {
             case 9, 10 -> rand.nextInt(90,101);
             default ->  0;
         };
+    }
+    public Assignment(String assignmentName, double weight){
+        this.assignmentId = "A" + String.format("%06d" , Assignment.nextId++);
+        this.assignmentName = assignmentName;
+        this.weight = weight;
     }
     @Override
     public String toString() {

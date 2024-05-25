@@ -12,7 +12,7 @@ import lombok.ToString;
 public class Department {
     private String departmentId;
     private String departmentName;
-    private static int nextId;
+    private static int nextId = 1;
 
     /**
      * Checks if a department name is valid or not
@@ -28,5 +28,14 @@ public class Department {
                 return false;
         }
         return true;
+    }
+    public Department(String departmentName){
+        if (Department.validateDepartmentName(departmentName)){
+            this.departmentId = "D" + String.format("%02d" , Department.nextId++);
+            this.departmentName = departmentName;
+        } else {
+            this.departmentId = null;
+            this.departmentName = null;
+        }
     }
 }
