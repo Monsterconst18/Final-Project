@@ -23,18 +23,25 @@ public class Course {
      * Checks if assignment weight is valid
      * @return true or false to determine if assignment weight is valid
      */
-    public boolean isAssignmentWeightValid() {
-       //TODO: TO be implemented
-            return false;
-        }
-
+   public boolean isAssignmentWeightValid() {
+       double weightSum = 0;
+       for (int i = 0; i < assignments.size(); i++) {
+           weightSum += assignments.get(i).getWeight();
+       }
+       if (weightSum == 1) {
+            return true;
+       } else {
+           return false;
+       }
+   }
     /**
      * Checks if a student is registered to a specific course
      * @param student
      * @return a response for course registration
      */
     public boolean registerStudent(Student student) {
-        //TODO: To be implemented
+        this.registeredStudents.add(student);
+
         return true;
 
     }
@@ -80,10 +87,13 @@ public class Course {
      * @return the simplified string
      */
     public String toSimplifiedString() {
-        //TODO: To be implemented
-        return "";
-    }
-
+        return "Course{" +
+                "courseId='" + courseId + '\'' +
+                ", courseName='" + courseName + '\'' +
+                ", credits=" + credits +
+                ", department=" + department +
+                '}';
+        }
     @Override
     public String toString() {
         return "Course{" +
@@ -94,5 +104,5 @@ public class Course {
                 ", assignments=" + assignments +
                 ", registeredStudents=" + registeredStudents +
                 '}';
+        }
     }
-}

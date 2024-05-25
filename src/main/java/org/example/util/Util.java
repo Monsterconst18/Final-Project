@@ -10,7 +10,6 @@ public class Util {
      */
     public static String ToTitleCase(String strIn) {
         String firstLetter1 = strIn.substring(0,1);
-        
         firstLetter1 = firstLetter1.toUpperCase();
         int spaceLocation = strIn.indexOf(" ");
         String restOfWord1 = strIn.substring(1,spaceLocation);

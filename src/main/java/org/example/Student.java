@@ -29,6 +29,7 @@ public class Student {
             return false;
         } else {
             registeredCourses.add(course);
+            course.registerStudent(this);
             return true;
         }
 
@@ -42,6 +43,7 @@ public class Student {
     public boolean dropCourse(Course course) {
       if (registeredCourses.contains(course)) {
           registeredCourses.remove(course);
+          course.getRegisteredStudents().remove(this);
           return true;
         } else {
             return false;
@@ -64,9 +66,6 @@ public class Student {
      * @return the simplified string
      */
     public String toSimplifiedString() {
-
-
-
         return "Student{" +
                 "studentId='" + studentId + '\'' +
                 ", studentName='" + studentName + '\'' +
