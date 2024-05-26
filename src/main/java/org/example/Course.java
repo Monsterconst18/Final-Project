@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.ArrayList;
+
 @EqualsAndHashCode
 @Getter
 @Setter
@@ -20,75 +21,132 @@ public class Course {
     private static int nextId = 1;
 
 
-    public Course(String courseName, double credits, Department department){
-        this.courseId = "C-" + department.getDepartmentId() + "-" + String.format("%02d" , Course.nextId++);
+    public Course(String courseName, double credits, Department department) {
+        this.courseId = "C-" + department.getDepartmentId() + "-" + String.format("%02d", Course.nextId++);
+        this.courseName = courseName;
+        this.credits = credits;
+        this.department = department;
+        this.assignments = new ArrayList<>();
+        this.registeredStudents = new ArrayList<>();
+        this.finalScores = new ArrayList<>();
     }
 
     /**
      * Checks if assignment weight is valid
+     *
      * @return true or false to determine if assignment weight is valid
      */
-   public boolean isAssignmentWeightValid() {
-       double weightSum = 0;
-       for (int i = 0; i < assignments.size(); i++) {
-           weightSum += assignments.get(i).getWeight();
-       }
-       if (weightSum == 1) {
+    public boolean isAssignmentWeightValid() {
+        double weightSum = 0;
+        for (int i = 0; i < assignments.size(); i++) {
+            weightSum += assignments.get(i).getWeight();
+        }
+        if (weightSum == 1.0) {
             return true;
-       } else {
-           return false;
-       }
-   }
+        } else {
+            return false;
+        }
+    }
+
     /**
      * Checks if a student is registered to a specific course
+     *
      * @param student
      * @return a response for course registration
      */
     public boolean registerStudent(Student student) {
-        this.registeredStudents.add(student);
+        if (registeredStudents.contains(student)) {
+            return false;
+        } else {
+            this.registeredStudents.add(student);
 
-        return true;
-
+            for (int i = 0; i < assignments.size(); i++) {
+                assignments.get(i).getScores().add(null);
+            }
+            finalScores.add(null);
+            return true;
+        }
     }
 
     /**
      * Calculates the overall average of each student in the class
+     *
      * @return the average of each student in the class
      */
     public int[] calcStudentsAverage() {
-        //TODO: To be implemented
-        return new int[]{9, 5, 3, 7, 6};
-
+        int[] StudentAverages = new int[registeredStudents.size()];
+        for (int i = 0; i < registeredStudents.size(); i++) {
+            double sum = 0;
+            for (int j = 0; j < assignments.size(); j++) {
+                Integer score = assignments.get(j).getScores().get(i);
+                if (score != null) {
+                    sum += score * assignments.get(j).getWeight();
+                }
+            }
+            StudentAverages[i] = (int) Math.round(sum);
+        }
+        return StudentAverages;
     }
 
     /**
      * Adds a new assignment to each student
+     *
      * @param assignmentName the name of the assignment
-     * @param weight the weight of each assignment
-     * @param maxScore the highest score of all assignments
+     * @param weight         the weight of each assignment
+     * @param maxScore       the highest score of all assignments
      * @return any new assignment if necessary
      */
     public boolean addAssignment(String assignmentName, double weight, int maxScore) {
-        //TODO: To be implemented
-        return false;
+        assignments.add(new Assignment(assignmentName, weight, maxScore));
+        return true;
     }
 
     /**
      * Generates random scores for each assignment
      */
     public void generateScores() {
-        //TODO: To be implemented
+
+        for (int i = 0; i < assignments.size(); i++) {
+            Assignment tempAssignment = assignments.get(i);
+            tempAssignment.generateRandomScore();
+            tempAssignment.calcAssignmentAvg();
+        }
+
+        int[] averages = calcStudentsAverage();
+        for (int i = 0; i < averages.length; i++) {
+            finalScores.set(i, (double) averages[i]);
+        }
     }
 
     /**
      * Displays the scores of each course in a table
      */
     public void displayScores() {
-        //TODO: To be implemented
+        System.out.println("Course: " + courseName + " (" + courseId + ")");
+
+        for (int i = 0 ; i < assignments.size() ; i++){
+            System.out.print(assignments.get(i).getAssignmentName() + "   ");
+        }
+        System.out.println("Final Score");
+        for (Student student : registeredStudents) {
+            System.out.print(student.getStudentName() + "  ");
+            for (Assignment assignment : assignments) {
+                System.out.print(assignment.getScores().get(registeredStudents.indexOf(student)) + "   ");
+            }
+            System.out.println(finalScores.get(registeredStudents.indexOf(student)));
+        }
+        System.out.print("Average  " );
+        //trying a enhanced for loop here, probably should have used it more
+        for (Assignment assignment : assignments) {
+            System.out.print(assignment.getAssignmentAverage() + "   ");
+        }
+        System.out.println();
+
     }
 
     /**
      * Converts a course to a simple string
+     *
      * @return the simplified string
      */
     public String toSimplifiedString() {
@@ -96,9 +154,10 @@ public class Course {
                 "courseId='" + courseId + '\'' +
                 ", courseName='" + courseName + '\'' +
                 ", credits=" + credits +
-                ", department=" + department +
+                ", department=" + department.getDepartmentName() +
                 '}';
-        }
+    }
+
     @Override
     public String toString() {
         return "Course{" +
@@ -109,5 +168,5 @@ public class Course {
                 ", assignments=" + assignments +
                 ", registeredStudents=" + registeredStudents +
                 '}';
-        }
     }
+}

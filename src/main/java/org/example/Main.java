@@ -8,8 +8,22 @@ public class Main {
         System.out.println(Department.validateDepartmentName("dsjkkswk    4wemd"));
         System.out.println(Util.ToTitleCase("fGjK lKaM"));
 
-        System.out.println(new Student("Cos" , Gender.MALE, new Department("dep dep")));
-        System.out.println(new Student("Anna" , Gender.FEMALE, new Department("dephhh dep")));
+        Department department1 = new Department("Science");
+        Department department2 = new Department("Math");
+
+
+
+        Address address1 = new Address(3750, "Lake", "Montreal", "QC", "H4R 4t4", "Canada");
+        Address address2 = new Address(45, "Manuel", "Montreal", "QC", "H3T 4t4", "Canada");
+
+        Student student1 = new Student("Cos" , Gender.MALE, address1 , department1);
+        Student student2 = new Student("Anna" , Gender.FEMALE, address2 , department2);
+
+
+
+        System.out.println(student1);
+        System.out.println(student2);
+
 
 
     }

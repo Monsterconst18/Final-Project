@@ -55,11 +55,13 @@ public class Student {
      * @param gender the student's gender
      * @param department the student's department
      */
-    public Student(String studentName, Gender gender, Department department) {
+    public Student(String studentName, Gender gender, Address address, Department department) {
         this.studentId = this.studentId = "S" + String.format("%06d" , Student.nextId++);
         this.studentName = studentName;
         this.gender = gender;
+        this.address = address;
         this.department = department;
+        this.registeredCourses = new ArrayList<>();
 
     }
 
