@@ -25,7 +25,9 @@ public class Assignment {
         for (int i = 0; i < scores.size(); i++) {
             sum += scores.get(i);
         }
-        assignmentAverage = (double) sum / scores.size();
+        double average = (double) sum / scores.size();
+        average = Math.round(average * Math.pow(10, 1)) / Math.pow(10, 1);
+        assignmentAverage = average;
     }
 
     /**

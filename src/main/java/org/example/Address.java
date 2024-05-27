@@ -2,11 +2,12 @@ package org.example;
 
 import lombok.*;
 
-
+// Lombok generated methods
 @ToString
 @EqualsAndHashCode
 @Getter
 @Setter
+// Fields
 public class Address {
     private int streetNo;
     private String street;
@@ -34,12 +35,15 @@ public class Address {
                     && Character.isSpaceChar(postalCode.charAt(3));
         }
     }
+    // 6 args constructor
     public Address(int streetNo, String street, String city, String province, String postalCode, String country){
         this.street = street;
         this.streetNo = streetNo;
         this.city = city;
         this.province = province;
         this.country = country;
+
+        // Checks if postal code is valid
         if (isPostalCodeValid(postalCode)){
             this.postalCode = postalCode.toUpperCase();
         }

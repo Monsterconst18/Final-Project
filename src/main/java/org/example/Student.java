@@ -7,9 +7,11 @@ import lombok.Setter;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+// Lombok generated methods
 @EqualsAndHashCode
 @Getter
 @Setter
+// Fields
 public class Student {
     private String studentId;
     private String studentName;
@@ -32,9 +34,7 @@ public class Student {
             course.registerStudent(this);
             return true;
         }
-
     }
-
     /**
      * Checks if a student dropped a specific course
      * @param course the dropped course
@@ -64,7 +64,6 @@ public class Student {
         this.registeredCourses = new ArrayList<>();
 
     }
-
     /**
      * Converts a student to a simple string
      * @return the simplified string
@@ -76,7 +75,7 @@ public class Student {
                 ", department=" + department +
                 '}';
     }
-
+    // toString method
     @Override
     public String toString() {
         return "Student{" +

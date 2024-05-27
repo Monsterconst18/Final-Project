@@ -5,10 +5,12 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+// Lombok generated methods
 @ToString
 @EqualsAndHashCode
 @Getter
 @Setter
+// Fields
 public class Department {
     private String departmentId;
     private String departmentName;
@@ -29,6 +31,7 @@ public class Department {
         }
         return true;
     }
+    // Constructor that checks if department name is valid
     public Department(String departmentName){
         if (Department.validateDepartmentName(departmentName)){
             this.departmentId = "D" + String.format("%02d" , Department.nextId++);
